@@ -1,0 +1,15 @@
+.ctaButton {
+  padding: 1rem;
+  border: 3px solid rgb(149, 27, 220);
+  border-radius: 2rem;
+  background-color: rgb(179, 94, 229);
+  color: rgb(246, 242, 242);
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.ctaButton:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(169, 62, 232);
+}
