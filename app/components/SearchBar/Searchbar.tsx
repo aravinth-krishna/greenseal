@@ -12,6 +12,7 @@ const SearchBar = () => {
 
   const industries = [
     "All",
+    "Automotive",
     "Energy",
     "Technology",
     "Manufacturing",
