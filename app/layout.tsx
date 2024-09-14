@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Green Seal",
+  title: "GreenSeal.org",
   description: "Corporate Accountability Tracker",
 };
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./Navbar.module.css";
 import { MdOutlineClose, MdOutlineMenu, MdLightMode } from "react-icons/md";
+import Link from "next/link";
 
 const Navbar = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -21,19 +22,19 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <a href="/about">About</a>
+            <Link href="/about">About</Link>
           </li>
           <li>
-            <a href="/featured">Featured</a>
+            <Link href="/featured">Featured</Link>
           </li>
           <li>
-            <a href="/explore">Explore</a>
+            <Link href="/explore">Explore</Link>
           </li>
           <li>
-            <a href="/report">Report</a>
+            <Link href="/report">Report</Link>
           </li>
         </ul>
       </nav>
@@ -43,19 +44,19 @@ const Navbar = () => {
             <h1>GreenSeal</h1>
           </li>
           <li>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <a href="/about">About</a>
+            <Link href="/about">About</Link>
           </li>
           <li>
-            <a href="/featured">Featured</a>
+            <Link href="/featured">Featured</Link>
           </li>
           <li>
-            <a href="/explore">Explore</a>
+            <Link href="/explore">Explore</Link>
           </li>
           <li>
-            <a href="/report">Report</a>
+            <Link href="/report">Report</Link>
           </li>
           <li>
             <a href="#">

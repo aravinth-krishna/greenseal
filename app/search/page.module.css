@@ -8,7 +8,10 @@
   width: 100%;
 }
 
-.searchHeader {
+.searchHeader h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .searchResults {

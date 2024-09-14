@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineSearch } from "react-icons/md";
 import styles from "./SearchBar.module.css";
+import Link from "next/link";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
@@ -21,9 +22,15 @@ const SearchBar = () => {
           }}
           placeholder="Search Companies..."
         />
-        <button className={styles.button}>
+        <Link
+          className={styles.button}
+          href={{
+            pathname: "/search",
+            query: { name: query },
+          }}
+        >
           <FaSearch size={20} />
-        </button>
+        </Link>
       </form>
     </>
   );

@@ -1,48 +1,49 @@
 import { FaInstagram, FaYoutube, FaGithub } from "react-icons/fa";
 import { FaMeta, FaX } from "react-icons/fa6";
 import styles from "./Contact.module.css";
+import Link from "next/link";
 
 const Contact = () => {
   return (
     <>
       <div className={styles.footer}>
         <div className={styles.socialLinks}>
-          <a href="#">
+          <Link href="#">
             <FaMeta size={30} />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <FaInstagram size={30} />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <FaX size={30} />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <FaYoutube size={30} />
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <FaGithub size={30} />
-          </a>
+          </Link>
         </div>
         <nav className={styles.bottomNav}>
           <ul>
             <li>
-              <a href="/">Home</a>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <a href="/about">About</a>
+              <Link href="/about">About</Link>
             </li>
             <li>
-              <a href="/featured">Featured</a>
+              <Link href="/featured">Featured</Link>
             </li>
             <li>
-              <a href="/explore">Explore</a>
+              <Link href="/explore">Explore</Link>
             </li>
             <li>
-              <a href="/report">Report</a>
+              <Link href="/report">Report</Link>
             </li>
           </ul>
         </nav>
-        <span>Copyright &copy;2024 GreenSeal</span>
+        <span>Copyright &copy;2024 GreenSeal.org</span>
       </div>
     </>
   );
