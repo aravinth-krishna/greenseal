@@ -4,12 +4,13 @@
   border: 1px solid #0067d6;
   border-radius: 2rem;
   margin-bottom: 1rem;
-  width: 40vw;
+  width: 45vw;
   background-color: white;
   overflow: hidden;
 }
 
 .searchIcon {
+  size: 2rem;
   margin-left: 1rem;
   color: #888;
   background-color: transparent;
@@ -17,17 +18,37 @@
 
 .input {
   flex: 1;
-  padding: 1rem;
+  padding: 0.5rem;
   border: none;
   outline: none;
   font-size: 1.5rem;
   background-color: transparent;
 }
 
+.dropdownContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
+  background-color: rgb(250, 249, 249);
+  border-radius: 1rem;
+  margin-right: 0.5rem;
+}
+
+.filterIcon {
+  color: #888;
+}
+
+.dropdown {
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  background-color: rgb(250, 249, 249);
+  border: none;
+  outline: none;
+}
+
 .button {
-  padding: 1.5rem;
-  padding-left: 1.2rem;
-  padding-right: 1.5rem;
+  padding: 1.15rem;
   background-color: #3993f4;
   color: white;
   border: 2px solid #0067d6;

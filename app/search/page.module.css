@@ -8,10 +8,27 @@
   width: 100%;
 }
 
-.searchHeader h1 {
+.searchInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchInfo h1 {
   font-size: 2rem;
-  margin-bottom: 1rem;
   text-align: center;
+  padding: 1rem;
+}
+
+.searchInfo p {
+  margin: 0rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 0.5rem;
+  background-color: #55d658;
+  border: 1px solid #22c125;
+  color: #ffffff;
+  font-size: 1rem;
 }
 
 .searchResults {
