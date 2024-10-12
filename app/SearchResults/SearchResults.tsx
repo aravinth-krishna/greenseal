@@ -7,7 +7,11 @@ const SearchResults = async () => {
     <>
       <div className={styles.searchResults}>
         {(await companies()).map((company) => (
-          <CompanyCard key={company.id} name={company.name} logo_src={""} />
+          <CompanyCard
+            key={company.id}
+            name={company.name ?? ""}
+            logo_src={company.logo ?? ""}
+          />
         ))}
       </div>
     </>

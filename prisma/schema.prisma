@@ -6,3 +6,28 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Company {
+  id                   Int      @id @default(autoincrement())
+  ticker               String?  @db.VarChar(5)
+  name                 String?  @db.VarChar(255)
+  currency             String?  @db.VarChar(3)
+  exchange             String?  @db.VarChar(255)
+  industry             String?  @db.VarChar(255)
+  logo                 String?
+  web_url              String?
+  environment_grade    String?  @db.VarChar(3)
+  environment_level    String?  @db.VarChar(16)
+  social_grade         String?  @db.VarChar(3)
+  social_level         String?  @db.VarChar(16)
+  governance_grade     String?  @db.VarChar(3)
+  governance_level     String?  @db.VarChar(16)
+  environment_score    Int?
+  social_score         Int?
+  governance_score     Int?
+  total_score          Int?
+  last_processing_date DateTime?
+  total_grade          String?  @db.VarChar(3)
+  total_level          String?  @db.VarChar(16)
+  cik                  BigInt?
+}

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import styles from "./CompanyCard.module.css";
 
 interface CompanyProps {
@@ -12,12 +10,7 @@ const CompanyCard = ({ name, logo_src }: CompanyProps) => {
     <>
       <div className={styles.companyCard}>
         <div className={styles.header}>
-          <Image
-            src={"/orion_icon.jpg"}
-            alt="Company logo"
-            width={20}
-            height={20}
-          />
+          <img src={logo_src} alt="Company logo" width={50} height={50} />
           <h1>{name}</h1>
         </div>
         <div className={styles.body}>
