@@ -4,7 +4,7 @@
   border: 1px solid #0067d6;
   border-radius: 2rem;
   margin-bottom: 1rem;
-  width: 45vw;
+  width: 50vw;
   background-color: white;
   overflow: hidden;
 }
@@ -29,7 +29,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 35%;
+  width: 55%;
+  height: 100%;
   background-color: rgb(250, 249, 249);
   border-radius: 1rem;
   margin-right: 0.5rem;
@@ -40,7 +41,7 @@
 }
 
 .dropdown {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   padding: 0.5rem;
   background-color: rgb(250, 249, 249);
   border: none;
