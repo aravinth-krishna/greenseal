@@ -11,12 +11,52 @@ const SearchBar = () => {
   const [industry, setIndustry] = useState("All");
   const industries = [
     "All",
-    "Automotive",
+    "Auto Components",
+    "Trading Companies and Distributors",
     "Energy",
-    "Technology",
-    "Manufacturing",
+    "Industrial Conglomerates",
+    "Metals & Mining",
+    "Real Estate",
+    "Marine",
+    "Construction",
+    "Media",
+    "Hotels, Restaurants & Leisure",
+    "Tobacco",
+    "Distributors",
+    "Road and Rail",
+    "Machinery",
+    "Financial Services",
+    "Hotels Restaurants and Leisure",
+    "Textiles Apparel and Luxury Goods",
+    "Metals and Mining",
     "Retail",
-    "Healthcare",
+    "Insurance",
+    "Electrical Equipment",
+    "Aerospace & Defense",
+    "Commercial Services and Supplies",
+    "Leisure Products",
+    "Chemicals",
+    "Packaging",
+    "Automobiles",
+    "Technology",
+    "Beverages",
+    "Banking",
+    "Health Care",
+    "Communications",
+    "Building",
+    "Airlines",
+    "Utilities",
+    "Life Sciences Tools and Services",
+    "Biotechnology",
+    "Consumer products",
+    "Aerospace and Defense",
+    "Telecommunication",
+    "Semiconductors",
+    "Food Products",
+    "Logistics and Transportation",
+    "Diversified Consumer Services",
+    "Pharmaceuticals",
+    "Professional Services",
   ];
 
   return (
@@ -58,8 +98,8 @@ const SearchBar = () => {
           href={{
             pathname: "/search",
             query: {
-              name: query || undefined, // Avoid sending empty query
-              industry: industry === "All" ? undefined : industry, // Avoid sending "All" in the query
+              name: query || undefined,
+              industry: industry === "All" ? undefined : industry,
             },
           }}
           as={`/search?name=${encodeURIComponent(

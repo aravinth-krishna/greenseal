@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./CTASearchBar.module.css";
 import { FaSearch, FaFilter } from "react-icons/fa";
 import { MdOutlineSearch } from "react-icons/md";
-import Link from "next/link";
 
 const CTASearchBar = () => {
-  const [query, setQuery] = useState("");
-  const [industry, setIndustry] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams?.get("name") || "");
+  const [industry, setIndustry] = useState(
+    searchParams?.get("industry") || "All"
+  );
 
   const industries = [
     "All",
@@ -46,7 +50,6 @@ const CTASearchBar = () => {
     "Communications",
     "Building",
     "Airlines",
-    "Energy",
     "Utilities",
     "Life Sciences Tools and Services",
     "Biotechnology",
@@ -61,18 +64,35 @@ const CTASearchBar = () => {
     "Professional Services",
   ];
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const ind = params.get("industry");
+    if (name) setQuery(name);
+    if (ind) setIndustry(ind);
+  }, []);
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const searchParams = new URLSearchParams({
+      name: query,
+      industry: industry === "All" ? "" : industry,
+    }).toString();
+
+    router.replace(`/search?${searchParams}`, { scroll: false });
+  };
+
   return (
     <>
-      <form className={styles.searchBar}>
+      <form className={styles.searchBar} onSubmit={handleSearch}>
         <MdOutlineSearch className={styles.searchIcon} size={28} />
 
         <input
           className={styles.input}
           type="search"
           value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder="Search Companies..."
         />
 
@@ -91,18 +111,9 @@ const CTASearchBar = () => {
           </select>
         </div>
 
-        <Link
-          className={styles.button}
-          href={{
-            pathname: "/search",
-            query: {
-              name: query,
-              industry: industry === "All" ? "" : industry,
-            },
-          }}
-        >
+        <button type="submit" className={styles.button}>
           <FaSearch size={20} />
-        </Link>
+        </button>
       </form>
     </>
   );
