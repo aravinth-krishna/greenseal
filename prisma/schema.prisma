@@ -6,18 +6,3 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-model Company {
-  id           Int      @id @default(autoincrement())
-  name         String
-  industry     Industry @relation(fields: [industryId], references: [id])
-  industryId   Int
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-}
-
-model Industry {
-  id        Int        @id @default(autoincrement())
-  name      String
-  companies Company[]
-}

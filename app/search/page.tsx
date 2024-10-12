@@ -1,15 +1,15 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import CompanyCard from "../components/CompanyCard/CompanyCard";
-import SearchBar from "../components/SearchBar/SearchBar";
+import SearchBar from "@/components/SearchBar/SearchBar";
 import styles from "./page.module.css";
+import SearchResults from "../SearchResults/SearchResults";
 
 const Search = () => {
   const searchParams = useSearchParams();
 
-  const name = searchParams.get("name");
-  const industry = searchParams.get("industry");
+  const name = searchParams?.get("name") || "";
+  const industry = searchParams?.get("industry") || "";
 
   return (
     <>
@@ -22,10 +22,7 @@ const Search = () => {
           </div>
         </div>
 
-        <div className={styles.searchResults}>
-          <CompanyCard name="Apple" logo_src="" rating={5} />
-          <CompanyCard name="Apple" logo_src="" rating={5} />
-        </div>
+        <SearchResults />
       </section>
     </>
   );

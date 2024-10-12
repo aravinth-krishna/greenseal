@@ -17,9 +17,9 @@ const Navbar = () => {
       <nav className={`${styles.sidebar} ${sidebarVisible ? styles.show : ""}`}>
         <ul>
           <li>
-            <a href="#" onClick={toggleSidebar}>
+            <Link href="#" onClick={toggleSidebar}>
               <MdOutlineClose />
-            </a>
+            </Link>
           </li>
           <li>
             <Link href="/">Home</Link>
@@ -64,10 +64,10 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="#" onClick={toggleSidebar}>
+            <Link href="#" onClick={toggleSidebar}>
               {" "}
               <MdOutlineMenu />{" "}
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

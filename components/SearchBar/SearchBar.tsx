@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { FaFilter, FaSearch } from "react-icons/fa";
 import { MdOutlineSearch } from "react-icons/md";
 import styles from "./SearchBar.module.css";
-import Link from "next/link";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const [industry, setIndustry] = useState("");
-
+  const [industry, setIndustry] = useState("All");
   const industries = [
     "All",
     "Automotive",
@@ -22,14 +21,15 @@ const SearchBar = () => {
 
   return (
     <>
-      <form className={styles.searchBar}>
+      <div className={styles.searchBar}>
         <MdOutlineSearch className={styles.searchIcon} size={28} />
 
         <input
           className={styles.input}
-          type="search"
+          type="text"
           value={query}
           onChange={(e) => {
+            console.log("Query: ", e.target.value);
             setQuery(e.target.value);
           }}
           placeholder="Search Companies..."
@@ -40,7 +40,10 @@ const SearchBar = () => {
           <select
             className={styles.dropdown}
             value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
+            onChange={(e) => {
+              console.log("Industry: ", e.target.value);
+              setIndustry(e.target.value);
+            }}
           >
             {industries.map((industry) => (
               <option key={industry} value={industry}>
@@ -55,14 +58,19 @@ const SearchBar = () => {
           href={{
             pathname: "/search",
             query: {
-              name: query,
-              industry: industry === "All" ? "" : industry,
+              name: query || undefined, // Avoid sending empty query
+              industry: industry === "All" ? undefined : industry, // Avoid sending "All" in the query
             },
           }}
+          as={`/search?name=${encodeURIComponent(
+            query
+          )}&industry=${encodeURIComponent(
+            industry === "All" ? "" : industry
+          )}`}
         >
           <FaSearch size={20} />
         </Link>
-      </form>
+      </div>
     </>
   );
 };
