@@ -8,6 +8,9 @@ interface Company {
   name?: string;
   logo?: string;
   industry?: string;
+  environment_score?: number;
+  environment_level?: string;
+  environment_grade?: string;
 }
 
 interface SearchResultsProps {
@@ -57,6 +60,10 @@ const SearchResults = ({ name = "", industry = "All" }: SearchResultsProps) => {
           key={company.id}
           name={company.name ?? ""}
           logo_src={company.logo ?? ""}
+          industry={company.industry ?? ""}
+          environment_score={company.environment_score ?? 0}
+          environment_level={company.environment_level ?? ""}
+          environment_grade={company.environment_grade ?? ""}
         />
       ))}
     </div>

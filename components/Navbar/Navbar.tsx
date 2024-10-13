@@ -41,7 +41,7 @@ const Navbar = () => {
       <nav className={styles.navbar}>
         <ul>
           <li>
-            <h1>GreenSeal</h1>
+            <h1>GreenSeal.org</h1>
           </li>
           <li>
             <Link href="/">Home</Link>
