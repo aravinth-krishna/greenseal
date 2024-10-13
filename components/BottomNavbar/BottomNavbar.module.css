@@ -1,0 +1,13 @@
+.bottomNav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.25rem;
+  color: black;
+}
+
+.bottomNav ul a:hover {
+  color: #3e8dca;
+  transition: color 0.3s ease;
+}

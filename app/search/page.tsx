@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import styles from "./page.module.css";
-import SearchResults from "../SearchResults/SearchResults";
+import SearchResults from "../../components/SearchResults/SearchResults";
 
 const Search = () => {
   const searchParams = useSearchParams();

@@ -1,0 +1,12 @@
+.socialLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: black;
+}
+
+.socialLinks a:hover {
+  color: #3e8dca;
+  transition: color 0.3s ease;
+}

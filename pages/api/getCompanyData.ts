@@ -20,9 +20,11 @@ export default async function handler(
           last_processing_date: true,
         },
       });
+
       res.status(200).json(companies);
     } catch (error) {
       console.error("Error fetching companies:", error);
+
       res.status(500).json({
         error: `Error fetching companies: ${(error as Error).message}`,
       });

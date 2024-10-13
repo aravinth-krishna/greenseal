@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import Contact from "@/components/Contact/Contact";
+import SocialsGroup from "@/components/SocialsGroup/SocialsGroup";
+import BottomNavbar from "@/components/BottomNavbar/BottomNavbar";
+import styles from "./layout.module.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,8 +36,11 @@ export default function RootLayout({
           <Navbar />
         </header>
         <main>{children}</main>
-        <footer>
-          <Contact />
+        <footer className={styles.footer}>
+          <SocialsGroup />
+          <BottomNavbar />
+
+          <span>Copyright &copy;2024 GreenSeal.org</span>
         </footer>
       </body>
     </html>
