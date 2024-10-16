@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import SocialsGroup from "@/components/SocialsGroup/SocialsGroup";
 import BottomNavbar from "@/components/BottomNavbar/BottomNavbar";
-import styles from "./layout.module.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,7 +35,7 @@ export default function RootLayout({
           <Navbar />
         </header>
         <main>{children}</main>
-        <footer className={styles.footer}>
+        <footer className="footer">
           <SocialsGroup />
           <BottomNavbar />
 

@@ -1,0 +1,33 @@
+.badge {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.aaa {
+  background-color: darkgreen;
+}
+
+.aa {
+  background-color: green;
+}
+
+.a {
+  background-color: yellow;
+  color: black;
+}
+
+.bbb {
+  background-color: rgb(246, 255, 0);
+  color: black;
+}
+
+.bb {
+  background-color: orange;
+}
+
+.b {
+  background-color: red;
+}

@@ -1,0 +1,26 @@
+.circularProgressBar {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.backgroundCircle {
+  fill: none;
+  stroke: #f0f0f0;
+}
+
+.progressCircle {
+  fill: none;
+  stroke: #4caf50; /* Change color based on the score */
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s;
+}
+
+.scoreText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  font-weight: bold;
+}

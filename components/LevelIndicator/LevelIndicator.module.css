@@ -1,0 +1,26 @@
+.levelIndicator {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.low {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.medium {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.high {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.excellent {
+  background-color: #4caf50;
+  color: white;
+}
