@@ -9,7 +9,7 @@ const CTAButton = () => {
     <>
       <Link
         href={{
-          pathname: "/explore",
+          pathname: "/community",
         }}
       >
         <motion.button
@@ -17,7 +17,7 @@ const CTAButton = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
         >
-          Explore Companies
+          Explore Community
         </motion.button>
       </Link>
     </>

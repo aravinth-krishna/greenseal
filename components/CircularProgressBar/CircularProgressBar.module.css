@@ -11,7 +11,7 @@
 
 .progressCircle {
   fill: none;
-  stroke: #4caf50; /* Change color based on the score */
+  stroke: #4caf50;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.3s;
 }
@@ -21,6 +21,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: bold;
+  text-align: center;
+}
+
+.scoreText span {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 5px;
+  text-align: center;
 }

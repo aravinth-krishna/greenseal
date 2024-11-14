@@ -32,7 +32,11 @@ const CircularProgressBar = ({ score }: CircularProgressBarProps) => {
           }}
         />
       </svg>
-      <div className={styles.scoreText}>{score}</div>
+      <div className={styles.scoreText}>
+        {score}
+        <br />
+        <span>Score</span>
+      </div>
     </div>
   );
 };

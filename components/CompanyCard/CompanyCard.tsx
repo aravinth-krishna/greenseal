@@ -3,6 +3,7 @@ import styles from "./CompanyCard.module.css";
 import CircularProgressBar from "../CircularProgressBar/CircularProgressBar";
 import EnvironmentalBadge from "../EnvironmentalBadge/EnvironmentalBadge";
 import LevelIndicator from "../LevelIndicator/LevelIndicator";
+import Link from "next/link";
 
 interface CompanyProps {
   name: string;
@@ -26,12 +27,25 @@ const CompanyCard = ({
       <div className={styles.header}>
         <Image src={logo_src} alt="Company logo" width={50} height={50} />
         <h1>{name}</h1>
-        <h2>{industry}</h2>
       </div>
       <div className={styles.body}>
-        <CircularProgressBar score={environment_score} />
-        <EnvironmentalBadge grade={environment_grade} />
-        <LevelIndicator level={environment_level} />
+        <h2>{industry}</h2>
+
+        <div className={styles.sectionMiddle}>
+          <div className={styles.sectionLeft}>
+            Grade
+            <EnvironmentalBadge grade={environment_grade} />
+            Level
+            <LevelIndicator level={environment_level} />
+          </div>
+          <div className={styles.sectionRight}>
+            <CircularProgressBar score={environment_score} />
+          </div>
+        </div>
+
+        <Link href={`/companies/${name}`} className={styles.learnMoreButton}>
+          Learn More
+        </Link>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 .badge {
-  display: inline-block;
+  display: flex;
   padding: 0.5em 1em;
   border-radius: 20px;
   font-weight: bold;
   color: white;
+  gap: 1rem;
 }
 
 .aaa {

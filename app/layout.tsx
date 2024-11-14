@@ -36,8 +36,8 @@ export default function RootLayout({
         </header>
         <main>{children}</main>
         <footer className="footer">
-          <SocialsGroup />
           <BottomNavbar />
+          <SocialsGroup />
 
           <span>Copyright &copy;2024 GreenSeal.org</span>
         </footer>
