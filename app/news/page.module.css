@@ -1,0 +1,20 @@
+.newsPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: #f3f4f6;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 2rem;
+}
+
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}

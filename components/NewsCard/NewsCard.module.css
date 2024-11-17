@@ -1,0 +1,81 @@
+.newsCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.imageContainer {
+  width: 100%;
+  height: 30%;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+}
+
+.meta {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #718096;
+  line-height: 1.5;
+}
+
+.date {
+  font-style: italic;
+}
+
+.author {
+  font-weight: 500;
+}
+
+.description {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.readMore {
+  align-self: flex-start;
+  font-size: 1rem;
+  color: #3182ce;
+  text-decoration: none;
+  border: 1px solid #3182ce;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.readMore:hover {
+  background-color: #3182ce;
+  color: #fff;
+}

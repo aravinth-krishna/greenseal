@@ -16,18 +16,76 @@ model Company {
   industry             String?  @db.VarChar(255)
   logo                 String?
   web_url              String?
+
   environment_grade    String?  @db.VarChar(3)
   environment_level    String?  @db.VarChar(16)
+
   social_grade         String?  @db.VarChar(3)
   social_level         String?  @db.VarChar(16)
+
   governance_grade     String?  @db.VarChar(3)
   governance_level     String?  @db.VarChar(16)
+
   environment_score    Int?
   social_score         Int?
   governance_score     Int?
+  
   total_score          Int?
   last_processing_date DateTime?
   total_grade          String?  @db.VarChar(3)
   total_level          String?  @db.VarChar(16)
   cik                  BigInt?
+
+  posts                Post[]
+}
+
+model User {
+  id                   Int      @id @default(autoincrement())
+  email                String   @unique @db.VarChar(255)
+  username             String   @unique @db.VarChar(50)
+  passwordHash         String   @db.VarChar(255)
+  createdAt            DateTime @default(now())
+
+  posts                Post[]
+  votes                Vote[]
+  comments             Comment[]
+}
+
+model Post {
+  id                   Int      @id @default(autoincrement())
+  title                String   @db.VarChar(255)
+  content              String
+  createdAt            DateTime @default(now())
+
+  userId               Int
+  user                 User     @relation(fields: [userId], references: [id])
+  companyId            Int?
+  company              Company? @relation(fields: [companyId], references: [id])
+
+  votes                Vote[]
+  comments             Comment[]
+}
+
+model Vote {
+  id                   Int      @id @default(autoincrement())
+  voteType             Int      // 1 for upvote, -1 for downvote
+  createdAt            DateTime @default(now())
+
+  userId               Int
+  user                 User     @relation(fields: [userId], references: [id])
+
+  postId               Int
+  post                 Post     @relation(fields: [postId], references: [id])
+}
+
+model Comment {
+  id                   Int      @id @default(autoincrement())
+  content              String
+  createdAt            DateTime @default(now())
+
+  userId               Int
+  user                 User     @relation(fields: [userId], references: [id])
+
+  postId               Int
+  post                 Post     @relation(fields: [postId], references: [id])
 }
