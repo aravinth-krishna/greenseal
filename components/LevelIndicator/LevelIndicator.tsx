@@ -9,7 +9,7 @@ const LevelIndicator = ({ level }: LevelIndicatorProps) => {
 
   return (
     <div className={`${styles.levelIndicator} ${styles[formattedLevel]}`}>
-      <span>{level}</span>
+      {level}
     </div>
   );
 };

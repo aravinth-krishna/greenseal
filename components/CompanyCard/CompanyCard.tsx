@@ -25,17 +25,18 @@ const CompanyCard = ({
   return (
     <div className={styles.companyCard}>
       <div className={styles.header}>
-        <Image src={logo_src} alt="Company logo" width={50} height={50} />
+        <Image src={logo_src} alt={`${name} logo`} width={50} height={50} />
         <h1>{name}</h1>
       </div>
+
       <div className={styles.body}>
         <h2>{industry}</h2>
 
         <div className={styles.sectionMiddle}>
           <div className={styles.sectionLeft}>
-            Grade
+            <p>Grade</p>
             <EnvironmentalBadge grade={environment_grade} />
-            Level
+            <p>Level</p>
             <LevelIndicator level={environment_level} />
           </div>
           <div className={styles.sectionRight}>

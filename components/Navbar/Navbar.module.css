@@ -48,6 +48,22 @@
   margin-right: auto;
 }
 
+.signInUpButton {
+  margin: 0.25rem 1rem;
+  background-color: #3d6eb9;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.signInUpButton:hover {
+  background-color: #43b93d;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  transition: background-color 0.3s ease;
+}
 .sidebar {
   position: fixed;
   top: 0;

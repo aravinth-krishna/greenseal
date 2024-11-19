@@ -1,34 +1,49 @@
 .badge {
-  display: flex;
-  padding: 0.5em 1em;
-  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 1.1em;
+  border-radius: 1.5rem;
   font-weight: bold;
-  color: white;
-  gap: 1rem;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .aaa {
-  background-color: darkgreen;
+  background-color: #198754; /* Vibrant Dark Green */
+  color: white;
 }
 
 .aa {
-  background-color: green;
+  background-color: #28a745; /* Standard Green */
+  color: white;
 }
 
 .a {
-  background-color: yellow;
+  background-color: #f9c74f; /* Warm Yellow */
   color: black;
 }
 
 .bbb {
-  background-color: rgb(246, 255, 0);
+  background-color: #f9844a; /* Soft Orange */
   color: black;
 }
 
 .bb {
-  background-color: orange;
+  background-color: #e63946; /* Coral Red */
+  color: white;
 }
 
 .b {
-  background-color: red;
+  background-color: #d00000; /* Deep Red */
+  color: white;
 }

@@ -23,7 +23,11 @@ const NewsCard = ({
   return (
     <div className={styles.newsCard}>
       <div className={styles.imageContainer}>
-        <img src={urlToImage} alt={title} className={styles.image} />
+        {urlToImage ? (
+          <img src={urlToImage} alt={title} className={styles.image} />
+        ) : (
+          <div className={styles.placeholderImage}>Image Not Available</div>
+        )}
       </div>
       <div className={styles.content}>
         <h1 className={styles.title}>{title}</h1>

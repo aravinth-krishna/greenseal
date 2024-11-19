@@ -8,8 +8,8 @@ interface EnvironmentalBadgeProps {
 const EnvironmentalBadge = ({ grade }: EnvironmentalBadgeProps) => {
   return (
     <div className={`${styles.badge} ${styles[grade.toLowerCase()]}`}>
-      <SlBadge />
-      {grade}
+      <SlBadge size={16} />
+      <span>{grade}</span>
     </div>
   );
 };

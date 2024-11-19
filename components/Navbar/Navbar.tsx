@@ -36,6 +36,9 @@ const Navbar = () => {
           <li>
             <Link href="/community">Community</Link>
           </li>
+          <li>
+            <Link href="/signup">Sign In/Up</Link>
+          </li>
         </ul>
       </nav>
       <nav className={styles.navbar}>
@@ -57,6 +60,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link href="/community">Community</Link>
+          </li>
+          <li className={styles.signInUpButton}>
+            <Link href="/signup">Sign In/Up</Link>
           </li>
           <li>
             <a href="#">

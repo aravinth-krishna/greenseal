@@ -1,8 +1,19 @@
 .levelIndicator {
-  padding: 8px 16px;
-  border-radius: 8px;
+  display: inline-block;
+  padding: 0.6em 1.4em;
+  border-radius: 1.5rem;
   font-weight: bold;
+  font-size: 0.9rem;
   text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-transform: capitalize;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.levelIndicator:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .low {

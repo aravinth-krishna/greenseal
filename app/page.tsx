@@ -6,10 +6,9 @@ export default function Home() {
   return (
     <>
       <section className={styles.hero}>
-        <h1 className={styles.heading}>Track Corporate Environmental Impact</h1>
+        <h1 className={styles.heading}>Accountability Begins with Awareness</h1>
         <p className={styles.subheading}>
-          Discover how corporations are affecting the environment and hold them
-          accountable.
+          Join the Movement for Environmental Responsibility.
         </p>
         <div className={styles.action}>
           <CTASearchBar />

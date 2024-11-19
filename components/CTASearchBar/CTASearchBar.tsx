@@ -16,7 +16,6 @@ const CTASearchBar = () => {
 
   const industries = [
     "All",
-    "Aerospace & Defense",
     "Aerospace and Defense",
     "Airlines",
     "Auto Components",

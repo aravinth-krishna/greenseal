@@ -1,9 +1,51 @@
 .ctaButton {
-  padding: 1rem;
-  border-radius: 2rem;
-  background-color: rgb(94, 123, 229);
-  color: rgb(246, 242, 242);
+  position: relative;
+  padding: 1rem 2rem;
+  border-radius: 2.5rem;
+  background: linear-gradient(90deg, #5e7be5, #4776e6);
+  color: #f6f2f2;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-top: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ctaButton::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 3rem;
+  background: linear-gradient(120deg, #4776e6, #6fa5e3, #88d6c0);
+  z-index: -1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+}
+
+.ctaButton:hover::before,
+.ctaButton:focus::before {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(111, 165, 227, 0.6);
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(90deg, #4776e6, #5e7be5);
+}
+
+.ctaButton:active {
+  transform: translateY(1px);
+  background: linear-gradient(90deg, #5e7be5, #6a94f4);
+}
+
+.ctaButton:focus {
+  outline: none;
 }
