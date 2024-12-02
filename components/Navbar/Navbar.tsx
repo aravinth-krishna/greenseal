@@ -31,7 +31,7 @@ const Navbar = () => {
             <Link href="/news">News</Link>
           </li>
           <li>
-            <Link href="/explore">Explore</Link>
+            <Link href="/search">Explore</Link>
           </li>
           <li>
             <Link href="/community">Community</Link>
@@ -50,19 +50,21 @@ const Navbar = () => {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/about">About</Link>
+            <Link href="/#about">About</Link>
           </li>
           <li>
             <Link href="/news">News</Link>
           </li>
           <li>
-            <Link href="/explore">Explore</Link>
+            <Link href="/search">Explore</Link>
           </li>
           <li>
             <Link href="/community">Community</Link>
           </li>
-          <li className={styles.signInUpButton}>
-            <Link href="/signup">Sign In/Up</Link>
+          <li>
+            <Link href="/signup" className={styles.signInUpButton}>
+              Sign In/Up
+            </Link>
           </li>
           <li>
             <a href="#">
@@ -71,8 +73,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link href="#" onClick={toggleSidebar}>
-              {" "}
-              <MdOutlineMenu />{" "}
+              <MdOutlineMenu />
             </Link>
           </li>
         </ul>

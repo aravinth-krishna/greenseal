@@ -49,21 +49,30 @@
 }
 
 .signInUpButton {
-  margin: 0.25rem 1rem;
-  background-color: #3d6eb9;
+  background: linear-gradient(135deg, #3e8dca 30%, #84caad 100%);
   color: white;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
   border: none;
-  border-radius: 2rem;
+  border-radius: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  text-align: center;
 }
+
 .signInUpButton:hover {
-  background-color: #43b93d;
-  color: white;
-  border: none;
-  border-radius: 2rem;
-  transition: background-color 0.3s ease;
+  background: linear-gradient(135deg, #68ba6e 0%, #429b8f 100%);
+  color: #f1f1f1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.signInUpButton a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
 .sidebar {
   position: fixed;
   top: 0;

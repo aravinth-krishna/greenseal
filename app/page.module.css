@@ -1,13 +1,13 @@
 .hero {
-  height: 90vh;
+  height: 94vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  padding-bottom: 5rem;
   width: 100%;
-  background: linear-gradient(135deg, #c4e5df 0%, #a6ddd6 50%, #a8bede 100%);
-  background: url("");
+  background: linear-gradient(135deg, #e2eeec 0%, #daedea 50%, #e9ecf1 100%);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -43,4 +43,96 @@
 .action p {
   font-size: 1.25rem;
   color: #797e81;
+}
+
+.about {
+  padding: 6rem 3rem;
+  background-color: #f1f8f6;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.aboutHeading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2e4d4f;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #57ab6f, #3c92d6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aboutContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.aboutFeature {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aboutFeature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.aboutFeature h3 {
+  font-size: 2.2rem;
+  color: #3c92d6;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.aboutFeature p {
+  font-size: 1.15rem;
+  color: #4b4b4b;
+  line-height: 1.75;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dataExplanation {
+  background-color: #e8f5f2;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-top: 4rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dataExplanation h3 {
+  font-size: 2.5rem;
+  color: #2e4d4f;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.dataExplanation p {
+  font-size: 1.5rem;
+  color: #4b4b4b;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .aboutHeading {
+    font-size: 2.5rem;
+  }
+
+  .aboutFeature {
+    padding: 2rem;
+  }
 }
