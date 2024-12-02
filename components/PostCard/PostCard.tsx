@@ -1,4 +1,3 @@
-// File: components/PostCard/PostCard.tsx
 import { useState } from "react";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
 import CommentSection from "@/components/CommentSection/CommentSection";
@@ -10,7 +9,13 @@ interface PostCardProps {
     title: string;
     content: string;
     user: { id: number; username: string };
-    votes: number;
+    votes: {
+      id: number;
+      voteType: number;
+      createdAt: string;
+      userId: number;
+      postId: number;
+    }[];
     comments: {
       id: number;
       content: string;
@@ -42,7 +47,12 @@ const PostCard = ({ post, user, onVote, onReply }: PostCardProps) => {
           <BiDownvote />
         </button>
       </div>
-      <p>Votes: {post.votes}</p>
+      <p>
+        Votes:{" "}
+        {Array.isArray(post.votes)
+          ? post.votes.reduce((total, vote) => total + vote.voteType, 0)
+          : 0}
+      </p>
       <button onClick={toggleComments}>
         {expanded ? "Hide Comments" : "See Comments"}
       </button>
