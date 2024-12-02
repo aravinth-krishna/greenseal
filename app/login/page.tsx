@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -57,6 +58,9 @@ const Login = () => {
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
+        <span>
+          New User? <Link href="/signup">Sign Up</Link>
+        </span>
       </form>
     </div>
   );

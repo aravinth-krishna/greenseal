@@ -48,7 +48,7 @@
   margin-right: auto;
 }
 
-.signInUpButton {
+.signInButton {
   background: linear-gradient(135deg, #3e8dca 30%, #84caad 100%);
   color: white;
   font-size: 1.15rem;
@@ -61,13 +61,13 @@
   text-align: center;
 }
 
-.signInUpButton:hover {
+.signInButton:hover {
   background: linear-gradient(135deg, #68ba6e 0%, #429b8f 100%);
   color: #f1f1f1;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.signInUpButton a {
+.signInButton a {
   text-decoration: none;
   color: inherit;
   display: inline-block;

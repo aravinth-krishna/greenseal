@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import styles from "./page.module.css";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -40,9 +42,35 @@ const Dashboard = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
+
   if (loading) return <p>Loading...</p>;
 
-  return <div>Welcome to your Dashboard, {user?.username}</div>;
+  return (
+    <div className={styles.dashboard}>
+      <h1>Welcome to your Dashboard, {user?.username}</h1>
+      <div className={styles.links}>
+        <Link href="/explore" className={styles.link}>
+          Explore
+        </Link>
+        <Link href="/community" className={styles.link}>
+          Community
+        </Link>
+        <Link href="/news" className={styles.link}>
+          News
+        </Link>
+        <Link href="/profile" className={styles.link}>
+          Profile
+        </Link>
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          Logout
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;

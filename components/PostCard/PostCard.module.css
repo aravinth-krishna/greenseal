@@ -1,0 +1,61 @@
+/* File: components/PostCard/PostCard.module.css */
+.postCard {
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f1f3f5);
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.postCard h2 {
+  font-size: 1.2rem;
+  color: #4a90e2;
+  margin-bottom: 0.5rem;
+}
+
+.postCard p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.voteButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.voteButtons button {
+  background: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.voteButtons button:hover {
+  transform: translateY(-2px);
+}
+
+.voteButtons button:active {
+  transform: translateY(0);
+}
+
+.voteButtons button:first-child {
+  background: linear-gradient(90deg, #34d399, #059669);
+}
+
+.voteButtons button:last-child {
+  background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.postCard p:last-of-type {
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #333;
+  text-align: center;
+}

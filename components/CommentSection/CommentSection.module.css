@@ -1,0 +1,6 @@
+/* File: components/CommentSection/CommentSection.module.css */
+.commentsSection {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ccc;
+}

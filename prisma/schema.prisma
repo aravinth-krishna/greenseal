@@ -81,13 +81,14 @@ model Vote {
 }
 
 model Comment {
-  id                   Int      @id @default(autoincrement())
-  content              String
-  createdAt            DateTime @default(now())
-
-  userId               Int
-  user                 User     @relation(fields: [userId], references: [id])
-
-  postId               Int
-  post                 Post     @relation(fields: [postId], references: [id])
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  parentId  Int?
+  parent    Comment? @relation("CommentToComment", fields: [parentId], references: [id])
+  children  Comment[] @relation("CommentToComment")
 }

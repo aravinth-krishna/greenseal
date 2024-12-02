@@ -125,3 +125,27 @@
   color: #333;
   text-align: center;
 }
+
+.commentsSection {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ccc;
+}
+
+.comment {
+  margin-bottom: 1rem;
+}
+
+.comment form {
+  margin-top: 0.5rem;
+}
+
+.comment textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.comment button {
+  margin-right: 0.5rem;
+}

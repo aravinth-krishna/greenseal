@@ -2,20 +2,24 @@
 
 import { useState, useEffect } from "react";
 import styles from "./page.module.css";
-import { BiDownvote, BiUpvote } from "react-icons/bi";
+import PostCard from "@/components/PostCard/PostCard";
+
+interface PostComment {
+  id: number;
+  content: string;
+  user: { id: number; username: string };
+  children: PostComment[];
+  postId: number; // Add postId to match the usage in CommentComponent
+}
 
 const Community = () => {
   interface Post {
     id: number;
     title: string;
     content: string;
-    user: {
-      id: number;
-      username: string;
-    };
-    votes: {
-      voteType: number;
-    }[];
+    user: { id: number; username: string };
+    votes: { voteType: number }[];
+    comments: PostComment[];
   }
 
   const [posts, setPosts] = useState<Post[]>([]);
@@ -35,9 +39,7 @@ const Community = () => {
       const token = localStorage.getItem("token");
       if (token) {
         const res = await fetch("/api/user", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
         if (res.ok) {
           const data = await res.json();
@@ -50,9 +52,7 @@ const Community = () => {
     fetchUser();
   }, []);
 
-  const handleNewPost = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleNewPost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!user) {
@@ -77,10 +77,7 @@ const Community = () => {
     }
   };
 
-  const handleVote = async (
-    postId: number,
-    voteType: number
-  ): Promise<void> => {
+  const handleVote = async (postId: number, voteType: number) => {
     if (!user) {
       alert("You must be logged in to vote");
       return;
@@ -92,10 +89,7 @@ const Community = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({
-        postId,
-        voteType,
-      }),
+      body: JSON.stringify({ postId, voteType }),
     });
 
     if (res.ok) {
@@ -105,7 +99,7 @@ const Community = () => {
     }
   };
 
-  const handleDelete = async (postId: number): Promise<void> => {
+  const handleDeletePost = async (postId: number) => {
     if (!user) {
       alert("You must be logged in to delete a post");
       return;
@@ -122,6 +116,54 @@ const Community = () => {
 
     if (res.ok) {
       setPosts((prev) => prev.filter((post) => post.id !== postId));
+    }
+  };
+
+  const handleNewComment = async (
+    postId: number,
+    content: string,
+    parentId: number | null = null
+  ) => {
+    if (!user) {
+      alert("You must be logged in to comment");
+      return;
+    }
+
+    const res = await fetch("/api/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ postId, content, parentId }),
+    });
+
+    if (res.ok) {
+      const updatedPosts = await fetch("/api/posts");
+      const data: Post[] = await updatedPosts.json();
+      setPosts(data);
+    }
+  };
+
+  const handleDeleteComment = async (commentId: number) => {
+    if (!user) {
+      alert("You must be logged in to delete a comment");
+      return;
+    }
+
+    const res = await fetch("/api/comments", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ commentId }),
+    });
+
+    if (res.ok) {
+      const updatedPosts = await fetch("/api/posts");
+      const data: Post[] = await updatedPosts.json();
+      setPosts(data);
     }
   };
 
@@ -151,28 +193,15 @@ const Community = () => {
       ) : (
         <div className={styles.postsList}>
           {posts.map((post) => (
-            <div key={post.id} className={styles.postCard}>
-              <h2>{post.title}</h2>
-              <p>{post.content}</p>
-              <p>By {post.user?.username || "Unknown User"}</p>
-              <div className={styles.voteButtons}>
-                <button onClick={() => handleVote(post.id, 1)}>
-                  <BiUpvote />
-                </button>
-                <button onClick={() => handleVote(post.id, -1)}>
-                  <BiDownvote />
-                </button>
-              </div>
-              <p>
-                Votes:{" "}
-                {Array.isArray(post.votes)
-                  ? post.votes.reduce((total, vote) => total + vote.voteType, 0)
-                  : 0}
-              </p>
-              {user?.id === post.user.id && (
-                <button onClick={() => handleDelete(post.id)}>Delete</button>
-              )}
-            </div>
+            <PostCard
+              key={post.id}
+              post={post}
+              user={user}
+              onVote={handleVote}
+              onDeletePost={handleDeletePost}
+              onDeleteComment={handleDeleteComment}
+              onReply={handleNewComment}
+            />
           ))}
         </div>
       )}

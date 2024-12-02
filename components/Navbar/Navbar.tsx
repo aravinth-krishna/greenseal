@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import styles from "./Navbar.module.css";
-import { MdOutlineClose, MdOutlineMenu, MdLightMode } from "react-icons/md";
+import { MdOutlineClose, MdOutlineMenu } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -37,7 +38,7 @@ const Navbar = () => {
             <Link href="/community">Community</Link>
           </li>
           <li>
-            <Link href="/signup">Sign In/Up</Link>
+            <Link href="/login">Sign In</Link>
           </li>
         </ul>
       </nav>
@@ -62,13 +63,13 @@ const Navbar = () => {
             <Link href="/community">Community</Link>
           </li>
           <li>
-            <Link href="/signup" className={styles.signInUpButton}>
-              Sign In/Up
+            <Link href="/login" className={styles.signInButton}>
+              Sign In
             </Link>
           </li>
           <li>
-            <a href="#">
-              <MdLightMode />
+            <a href="/dashboard">
+              <CgProfile size={25} />
             </a>
           </li>
           <li>
