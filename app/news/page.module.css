@@ -1,31 +1,31 @@
 .newsPage {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 20px;
   background-color: #e6f7f4;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pageTitle {
-  font-size: 2.5rem;
+  font-size: 2em;
   font-weight: bold;
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
 .newsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
   justify-items: center;
 }
 
 .noArticles {
   text-align: center;
-  color: #2c3e50;
-  font-size: 1.2rem;
+  color: #666;
+  font-size: 1.2em;
   font-weight: 500;
 }
 
@@ -101,4 +101,8 @@
   background-color: #3182ce;
   color: #ffffff;
   font-weight: bold;
+}
+
+.filterContainer {
+  margin-bottom: 20px;
 }

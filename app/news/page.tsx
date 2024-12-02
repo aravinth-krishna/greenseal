@@ -1,6 +1,8 @@
+"use client";
+
 import styles from "./page.module.css";
 import NewsCard from "@/components/NewsCard/NewsCard";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 type NewsArticle = {
   source: { id: string | null; name: string };
@@ -13,44 +15,109 @@ type NewsArticle = {
   content: string;
 };
 
-const News = async () => {
-  const apiKey = process.env.NEWS_API_KEY;
-  const query = `
-  climate OR environment OR sustainability OR green energy OR renewable energy OR
-  solar OR wind OR biodiversity OR conservation OR pollution OR emissions OR
-  sustainable development OR climate action OR carbon neutrality OR eco-friendly OR
-  net zero OR environmental responsibility OR corporate social responsibility OR
-  green technology OR energy efficiency OR recycling OR wildlife OR clean air
-`;
+const News = () => {
+  const [articles, setArticles] = useState<NewsArticle[]>([]);
+  const [timeRange, setTimeRange] = useState("lastMonth");
 
-  const today = new Date();
-  const lastWeek = new Date(today);
-  lastWeek.setDate(today.getDate() - 7);
+  const fetchNews = async (timeRange: string) => {
+    const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
+    const query = `
+      climate OR environment OR sustainability OR "green energy" OR "renewable energy" OR
+      solar OR wind OR biodiversity OR conservation OR pollution OR emissions OR
+      "sustainable development" OR "climate action" OR "carbon neutrality" OR eco-friendly OR
+      "net zero" OR "environmental responsibility" OR "corporate social responsibility" OR
+      "green technology" OR "energy efficiency" OR recycling OR wildlife OR "clean air"
+      OR nature OR "climate change" OR "global warming" OR "environmental protection"
+    `
+      .replace(/\s+/g, " ")
+      .trim(); // Remove extra spaces and newlines
 
-  const fromDate = lastWeek.toISOString().split("T")[0];
-  const toDate = today.toISOString().split("T")[0];
-  const sortBy = "publishedAt";
+    const today = new Date();
+    const fromDate = new Date(today);
 
-  const url = `https://newsapi.org/v2/everything?q=${query}&from=${fromDate}&to=${toDate}&sortBy=${sortBy}&apiKey=${apiKey}`;
+    switch (timeRange) {
+      case "last24Hours":
+        fromDate.setDate(today.getDate() - 1);
+        break;
+      case "lastWeek":
+        fromDate.setDate(today.getDate() - 7);
+        break;
+      case "lastMonth":
+        fromDate.setMonth(today.getMonth() - 1);
+        break;
+      case "lastYear":
+        fromDate.setFullYear(today.getFullYear() - 1);
+        break;
+      default:
+        fromDate.setMonth(today.getMonth() - 1);
+    }
 
-  const res = await fetch(url, { next: { revalidate: 60 } });
-  const data = await res.json();
+    const fromDateString = fromDate.toISOString().split("T")[0];
+    const toDateString = today.toISOString().split("T")[0];
+    const sortBy = "publishedAt";
 
-  const filteredArticles = data.articles.filter(
-    (article: NewsArticle) =>
-      article.title.toLowerCase().includes("climate") ||
-      article.title.toLowerCase().includes("environment") ||
-      article.title.toLowerCase().includes("sustainability")
-  );
+    const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(
+      query
+    )}&from=${fromDateString}&to=${toDateString}&sortBy=${sortBy}&searchIn=title,description,content&apiKey=${apiKey}`;
+
+    try {
+      console.log("Fetching news from URL:", url); // Debugging statement
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log("API response data:", data); // Debugging statement
+
+      if (data.articles) {
+        const filteredArticles = data.articles.filter(
+          (article: NewsArticle) =>
+            !article.title.includes("[Removed]") &&
+            !article.description.includes("[Removed]") &&
+            (article.title.toLowerCase().includes("climate") ||
+              article.title.toLowerCase().includes("environment") ||
+              article.title.toLowerCase().includes("sustainability") ||
+              article.title.toLowerCase().includes("clean energy") ||
+              article.title.toLowerCase().includes("renewable energy") ||
+              article.description.toLowerCase().includes("climate") ||
+              article.description.toLowerCase().includes("environment") ||
+              article.description.toLowerCase().includes("sustainability") ||
+              article.description.toLowerCase().includes("clean energy") ||
+              article.description.toLowerCase().includes("renewable energy"))
+        );
+        setArticles(filteredArticles);
+      } else {
+        console.error("No articles found in the response");
+        setArticles([]);
+      }
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      setArticles([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchNews(timeRange);
+  }, [timeRange]);
 
   return (
     <div className={styles.newsPage}>
       <h1 className={styles.pageTitle}>Environmental News</h1>
+      <div className={styles.filterContainer}>
+        <label htmlFor="timeRange">Filter by:</label>
+        <select
+          id="timeRange"
+          value={timeRange}
+          onChange={(e) => setTimeRange(e.target.value)}
+        >
+          <option value="last24Hours">Last 24 Hours</option>
+          <option value="lastWeek">Last Week</option>
+          <option value="lastMonth">Last Month</option>
+          <option value="lastYear">Last Year</option>
+        </select>
+      </div>
       <div className={styles.newsGrid}>
-        {filteredArticles.length > 0 ? (
-          filteredArticles.map((article: NewsArticle) => (
+        {articles.length > 0 ? (
+          articles.map((article: NewsArticle, index: number) => (
             <NewsCard
-              key={article.url}
+              key={`${article.url}-${index}`} // Ensure unique key
               source={article.source}
               author={article.author}
               title={article.title}
@@ -63,7 +130,7 @@ const News = async () => {
           ))
         ) : (
           <p className={styles.noArticles}>
-            No relevant articles found for this week.
+            No relevant articles found for this period.
           </p>
         )}
       </div>
