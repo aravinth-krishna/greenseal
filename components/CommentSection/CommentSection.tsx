@@ -20,7 +20,7 @@ interface CommentSectionProps {
 
 const CommentSection = ({
   postId,
-  comments,
+  comments = [], // Default value for comments
   user,
   onDelete,
   onReply,

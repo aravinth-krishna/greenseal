@@ -1,18 +1,97 @@
-/* File: components/Comment/Comment.module.css */
 .comment {
+  padding: 1rem;
   margin-bottom: 1rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease-in-out;
 }
 
-.comment form {
-  margin-top: 0.5rem;
+.comment:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.comment textarea {
-  width: 100%;
-  padding: 0.5rem;
+.commentContent {
   margin-bottom: 0.5rem;
 }
 
-.comment button {
-  margin-right: 0.5rem;
+.text {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.author {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.replyButton,
+.deleteButton {
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  color: #4f46e5;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.replyButton:hover,
+.deleteButton:hover {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.replyForm {
+  margin-top: 1rem;
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: #374151;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  resize: vertical;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border 0.2s ease-in-out;
+}
+
+.textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+.submitReply {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.3s ease;
+}
+
+.submitReply:hover {
+  background: #4338ca;
+}
+
+.children {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #e5e7eb;
 }

@@ -4,14 +4,25 @@ import { BiDownvote, BiUpvote } from "react-icons/bi";
 import CommentSection from "@/components/CommentSection/CommentSection";
 import styles from "./PostCard.module.css";
 
-const PostCard = ({
-  post,
-  user,
-  onVote,
-  onDeletePost,
-  onDeleteComment,
-  onReply,
-}: PostCardProps) => {
+interface PostCardProps {
+  post: {
+    id: number;
+    title: string;
+    content: string;
+    user: { id: number; username: string };
+    votes: number;
+    comments: {
+      id: number;
+      content: string;
+      user: { id: number; username: string };
+    }[];
+  };
+  user: { id: number; username: string } | null;
+  onVote: (postId: number, vote: number) => void;
+  onReply: (postId: number, content: string, parentId: number | null) => void;
+}
+
+const PostCard = ({ post, user, onVote, onReply }: PostCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleComments = () => {
@@ -31,15 +42,7 @@ const PostCard = ({
           <BiDownvote />
         </button>
       </div>
-      <p>
-        Votes:{" "}
-        {Array.isArray(post.votes)
-          ? post.votes.reduce((total, vote) => total + vote.voteType, 0)
-          : 0}
-      </p>
-      {user?.id === post.user.id && (
-        <button onClick={() => onDeletePost(post.id)}>Delete</button>
-      )}
+      <p>Votes: {post.votes}</p>
       <button onClick={toggleComments}>
         {expanded ? "Hide Comments" : "See Comments"}
       </button>
@@ -48,7 +51,6 @@ const PostCard = ({
           postId={post.id}
           comments={post.comments}
           user={user}
-          onDelete={onDeleteComment}
           onReply={onReply}
         />
       )}

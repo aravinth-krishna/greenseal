@@ -1,6 +1,65 @@
-/* File: components/CommentSection/CommentSection.module.css */
 .commentsSection {
-  margin-top: 1rem;
-  padding-left: 1rem;
-  border-left: 2px solid #ccc;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.heading {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.commentsList {
+  margin-bottom: 1.5rem;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: #374151;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  resize: vertical;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border 0.2s ease-in-out;
+}
+
+.textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+.submitButton {
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(90deg, #4f46e5, #4338ca);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.submitButton:hover {
+  background: linear-gradient(90deg, #4338ca, #4f46e5);
+  transform: translateY(-2px);
+}
+
+.submitButton:active {
+  transform: translateY(0);
 }
