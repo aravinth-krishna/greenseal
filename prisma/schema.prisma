@@ -67,15 +67,17 @@ model Post {
 }
 
 model Vote {
-  id                   Int      @id @default(autoincrement())
-  voteType             Int      // 1 for upvote, -1 for downvote
-  createdAt            DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  voteType  Int      // 1 for upvote, -1 for downvote
+  createdAt DateTime @default(now())
 
-  userId               Int
-  user                 User     @relation(fields: [userId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 
-  postId               Int
-  post                 Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId]) // Ensure unique votes per user per post
 }
 
 model Comment {
