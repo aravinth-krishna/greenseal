@@ -180,15 +180,20 @@ const Community = () => {
 
   return (
     <div className={styles.communityContainer}>
-      <h1 className={styles.heading}>Community</h1>
+      <h1 className={styles.heading}>Community Posts</h1>
       <div className={styles.motivationalSection}>
-        <h2>Welcome to the Community!</h2>
-        <p>Connect, share, and grow with like-minded individuals.</p>
+        <h2>Welcome to our Community!</h2>
         <p>
-          “Alone we can do so little; together we can do so much.” – Helen
+          Connect, share, and grow with like-minded individuals.
+          <br /> Make a Positive change for the People
+        </p>
+        <p>
+          “Alone we can do so little; together we can do so much.” <br />– Helen
           Keller
         </p>
       </div>
+
+      <h2>Let&apos;s share your thoughts</h2>
       <form onSubmit={handleNewPost} className={styles.newPostForm}>
         <input
           type="text"
