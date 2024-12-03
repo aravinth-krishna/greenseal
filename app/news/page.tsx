@@ -58,7 +58,7 @@ const News = () => {
 
     const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(
       query
-    )}&from=${fromDateString}&to=${toDateString}&sortBy=${sortBy}&searchIn=title,description,content&apiKey=${apiKey}`;
+    )}&from=${fromDateString}&to=${toDateString}&sortBy=${sortBy}&language=en&searchIn=title,description,content&apiKey=${apiKey}`;
 
     try {
       console.log("Fetching news from URL:", url); // Debugging statement
@@ -67,22 +67,7 @@ const News = () => {
       console.log("API response data:", data); // Debugging statement
 
       if (data.articles) {
-        const filteredArticles = data.articles.filter(
-          (article: NewsArticle) =>
-            !article.title.includes("[Removed]") &&
-            !article.description.includes("[Removed]") &&
-            (article.title.toLowerCase().includes("climate") ||
-              article.title.toLowerCase().includes("environment") ||
-              article.title.toLowerCase().includes("sustainability") ||
-              article.title.toLowerCase().includes("clean energy") ||
-              article.title.toLowerCase().includes("renewable energy") ||
-              article.description.toLowerCase().includes("climate") ||
-              article.description.toLowerCase().includes("environment") ||
-              article.description.toLowerCase().includes("sustainability") ||
-              article.description.toLowerCase().includes("clean energy") ||
-              article.description.toLowerCase().includes("renewable energy"))
-        );
-        setArticles(filteredArticles);
+        setArticles(data.articles);
       } else {
         console.error("No articles found in the response");
         setArticles([]);
