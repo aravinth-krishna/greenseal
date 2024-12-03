@@ -53,7 +53,7 @@ const Dashboard = () => {
     <div className={styles.dashboard}>
       <h1>Welcome to your Dashboard, {user?.username}</h1>
       <div className={styles.links}>
-        <Link href="/explore" className={styles.link}>
+        <Link href="/search" className={styles.link}>
           Explore
         </Link>
         <Link href="/community" className={styles.link}>

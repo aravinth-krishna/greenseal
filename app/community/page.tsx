@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import PostCard from "@/components/PostCard/PostCard";
+import { useRouter } from "next/navigation";
 
 interface PostComment {
   id: number;
   content: string;
   user: { id: number; username: string };
   children: PostComment[];
-  postId: number; // Add postId to match the usage in CommentComponent
+  postId: number;
 }
 
 const Community = () => {
@@ -27,30 +28,37 @@ const Community = () => {
   const [user, setUser] = useState<{ id: number; username: string } | null>(
     null
   );
+  const router = useRouter();
 
   useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        router.push("/login");
+        return;
+      }
+
+      const res = await fetch("/api/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      } else {
+        router.push("/login");
+      }
+    };
+
     const fetchPosts = async () => {
       const res = await fetch("/api/posts");
       const data = await res.json();
       setPosts(data);
     };
 
-    const fetchUser = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const res = await fetch("/api/user", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setUser(data);
-        }
-      }
-    };
-
-    fetchPosts();
     fetchUser();
-  }, []);
+    fetchPosts();
+  }, [router]);
 
   const handleNewPost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -161,16 +169,26 @@ const Community = () => {
     });
 
     if (res.ok) {
-      const updatedPosts = await fetch("/api/posts");
-      const data: Post[] = await updatedPosts.json();
-      setPosts(data);
+      setPosts((prev) =>
+        prev.map((post) => ({
+          ...post,
+          comments: post.comments.filter((comment) => comment.id !== commentId),
+        }))
+      );
     }
   };
 
   return (
     <div className={styles.communityContainer}>
-      <h1>Community</h1>
-
+      <h1 className={styles.heading}>Community</h1>
+      <div className={styles.motivationalSection}>
+        <h2>Welcome to the Community!</h2>
+        <p>Connect, share, and grow with like-minded individuals.</p>
+        <p>
+          “Alone we can do so little; together we can do so much.” – Helen
+          Keller
+        </p>
+      </div>
       <form onSubmit={handleNewPost} className={styles.newPostForm}>
         <input
           type="text"
@@ -178,6 +196,7 @@ const Community = () => {
           value={newPost.title}
           onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
           required
+          onDeletePost={handleDeletePost}
         />
         <textarea
           placeholder="Post Content"
@@ -185,26 +204,26 @@ const Community = () => {
           onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
           required
         />
-        <button type="submit">Post</button>
+        <button type="submit" className={styles.submitButton}>
+          Submit
+        </button>
       </form>
-
-      {posts.length === 0 ? (
-        <p>No posts yet. Be the first to contribute!</p>
-      ) : (
-        <div className={styles.postsList}>
-          {posts.map((post) => (
+      <div className={styles.postsList}>
+        {posts.length > 0 ? (
+          posts.map((post) => (
             <PostCard
               key={post.id}
               post={post}
               user={user}
               onVote={handleVote}
-              onDeletePost={handleDeletePost}
-              onDeleteComment={handleDeleteComment}
               onReply={handleNewComment}
+              onDeleteComment={handleDeleteComment}
             />
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <p className={styles.noPosts}>No posts yet. Be the first to share!</p>
+        )}
+      </div>
     </div>
   );
 };
