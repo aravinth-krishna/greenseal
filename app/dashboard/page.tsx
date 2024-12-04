@@ -1,8 +1,10 @@
+// app/dashboard/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { FaSearch, FaUsers, FaNewspaper, FaSignOutAlt } from "react-icons/fa";
 import styles from "./page.module.css";
 
 const Dashboard = () => {
@@ -31,11 +33,9 @@ const Dashboard = () => {
         const data = await response.json();
         setUser(data);
       } else {
-        console.error("Failed to fetch user data: ", response.statusText);
         router.push("/login");
       }
-    } catch (error) {
-      console.error("Failed to fetch user data", error);
+    } catch {
       router.push("/login");
     } finally {
       setLoading(false);
@@ -51,24 +51,35 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      <h1>Welcome to your Dashboard, {user?.username}</h1>
-      <div className={styles.links}>
-        <Link href="/search" className={styles.link}>
-          Explore
+      <header className={styles.header}>
+        <h1>Welcome, {user?.username}</h1>
+        <p>Your personalized dashboard for quick navigation and insights.</p>
+      </header>
+
+      <section className={styles.links}>
+        <Link href="/search" className={styles.card}>
+          <FaSearch className={styles.icon} />
+          <h2>Explore</h2>
+          <p>Discover new companies and trends in ESG.</p>
         </Link>
-        <Link href="/community" className={styles.link}>
-          Community
+
+        <Link href="/community" className={styles.card}>
+          <FaUsers className={styles.icon} />
+          <h2>Community</h2>
+          <p>Connect and share insights with like-minded professionals.</p>
         </Link>
-        <Link href="/news" className={styles.link}>
-          News
+
+        <Link href="/news" className={styles.card}>
+          <FaNewspaper className={styles.icon} />
+          <h2>News</h2>
+          <p>Stay updated with the latest environmental and social news.</p>
         </Link>
-        <Link href="/profile" className={styles.link}>
-          Profile
-        </Link>
-        <button onClick={handleLogout} className={styles.logoutButton}>
-          Logout
-        </button>
-      </div>
+      </section>
+
+      <button onClick={handleLogout} className={styles.logoutButton}>
+        <FaSignOutAlt size={24} className={styles.icon} />
+        Logout
+      </button>
     </div>
   );
 };

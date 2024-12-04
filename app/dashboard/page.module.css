@@ -1,51 +1,84 @@
+/* page.module.css */
 .dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa, #e4e9f2);
   min-height: 100vh;
-  background: linear-gradient(135deg, #e2eeec, #daedea);
+  padding: 3rem;
   color: #333;
-  font-family: Arial, sans-serif;
-  padding: 2rem;
 }
 
-.dashboard h1 {
-  font-size: 2.5rem;
+.header {
+  text-align: center;
+  margin-top: 2rem;
   margin-bottom: 2rem;
-  color: #2c3e50;
+}
+
+.header h1 {
+  font-size: 2.8rem;
+  color: #1e3a8a;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #4a5568;
 }
 
 .links {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  margin-top: 3rem;
+  gap: 2rem;
+  justify-content: center;
 }
 
-.link {
-  background: #4caf50;
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 1.2rem;
-  transition: background 0.3s ease;
+.card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 250px;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-.link:hover {
-  background: #45a049;
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.icon {
+  font-size: 3rem;
+  color: #2b6cb0;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  color: #1a202c;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
 }
 
 .logoutButton {
+  margin-top: 2rem;
   background: #e74c3c;
   color: white;
   padding: 1rem 2rem;
-  border-radius: 8px;
   border: none;
-  cursor: pointer;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
   font-size: 1.2rem;
+  cursor: pointer;
   transition: background 0.3s ease;
+}
+
+.logoutButton .icon {
+  color: #f5f7fa;
+  margin-right: 0.5rem;
 }
 
 .logoutButton:hover {

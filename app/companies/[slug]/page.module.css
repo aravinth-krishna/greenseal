@@ -1,122 +1,126 @@
 .companyContainer {
   max-width: 900px;
-  margin: 0 auto;
-  padding: 2.5rem;
-  background: linear-gradient(135deg, #ffffff, #f0f4f8);
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  padding: 3rem;
+  background: linear-gradient(135deg, #f9fafb, #eef1f6);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.companyContainer header {
+.headerSection {
   text-align: center;
   margin-bottom: 3rem;
+  color: #333;
 }
 
 .companyLogo {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   transition: transform 0.3s ease;
 }
 
 .companyLogo:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .companyName {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 0.75rem;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
 }
 
-.companyIndustry {
-  font-size: 1.3rem;
-  color: #6c757d;
+.companyIndustry,
+.companyExchange {
+  font-size: 1.4rem;
+  color: #4a5568;
 }
 
-.overviewSection {
-  margin-bottom: 2.5rem;
-}
-
-.overviewSection h2 {
-  font-size: 2rem;
-  color: #007bff;
-  text-align: center;
-  margin-bottom: 1.5rem;
+.overviewSection h2,
+.additionalInfo h2 {
+  font-size: 2.2rem;
+  color: #2b6cb0;
+  margin-bottom: 2rem;
 }
 
 .overviewGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 
 .overviewItem {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 12px;
+  flex: 1 1 30%;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .overviewItem:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .overviewItem h3 {
-  font-size: 1.3rem;
-  color: #333;
-  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+  color: #2b6cb0;
+  margin-bottom: 1rem;
 }
 
 .overviewItem p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #555;
+  margin-bottom: 0.5rem;
 }
 
 .additionalInfo {
+  margin-top: 2rem;
   background: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.additionalInfo h2 {
-  font-size: 2rem;
-  color: #007bff;
-  margin-bottom: 1.5rem;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .additionalInfo p {
-  font-size: 1.1rem;
-  margin: 0.75rem 0;
-  color: #333;
+  font-size: 1.2rem;
+  color: #444;
+  line-height: 1.6;
 }
 
 .additionalInfo a {
-  color: #007bff;
+  color: #3182ce;
   font-weight: 600;
   text-decoration: none;
 }
 
 .additionalInfo a:hover {
   text-decoration: underline;
-  color: #0056b3;
+  color: #2b6cb0;
+}
+
+.backButton {
+  display: inline-block;
+  background-color: #2b6cb0;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #2a4365;
+  transform: translateY(-3px);
 }
