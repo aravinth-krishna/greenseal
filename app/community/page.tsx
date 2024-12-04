@@ -204,16 +204,18 @@ const Community = () => {
         <h2>Welcome to our Community!</h2>
         <p>
           Connect, share, and grow with like-minded individuals.
-          <br /> Make a Positive change for the People
+          <br />
+          Make a Positive change for the People
         </p>
-        <p>
-          “Alone we can do so little; together we can do so much.” <br />– Helen
-          Keller
-        </p>
+        <br />
+        <em>
+          <q>Alone we can do so little; together we can do so much.</q> <br />–
+          Helen Keller
+        </em>
       </div>
 
-      <h2>Let&apos;s share your thoughts</h2>
       <form onSubmit={handleNewPost} className={styles.newPostForm}>
+        <h2>Let&apos;s share your thoughts</h2>
         <input
           type="text"
           placeholder="Post Title"
