@@ -37,6 +37,7 @@ const PostCard = ({
   onVote,
   onReply,
   onDeletePost,
+  onDeleteComment,
 }: PostCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -47,13 +48,16 @@ const PostCard = ({
   return (
     <div className={styles.postCard}>
       <h2>{post.title}</h2>
+      <hr />
       <p>{post.content}</p>
-      <p>By {post.user?.username || "Unknown User"}</p>
+      <br />
+      <hr />
+      <p>by {post.user?.username || "Unknown User"}</p>
       <div className={styles.voteButtons}>
-        <button onClick={() => onVote(post.id, 1)}>
+        <button onClick={() => onVote(post.id, 1)} className={styles.upvote}>
           <BiUpvote />
         </button>
-        <button onClick={() => onVote(post.id, -1)}>
+        <button onClick={() => onVote(post.id, -1)} className={styles.downvote}>
           <BiDownvote />
         </button>
       </div>
@@ -63,7 +67,7 @@ const PostCard = ({
           ? post.votes.reduce((total, vote) => total + vote.voteType, 0)
           : 0}
       </p>
-      <button onClick={toggleComments}>
+      <button onClick={toggleComments} className={styles.toggleComments}>
         {expanded ? "Hide Comments" : "See Comments"}
       </button>
       {expanded && (
@@ -72,6 +76,7 @@ const PostCard = ({
           comments={post.comments}
           user={user}
           onReply={onReply}
+          onDelete={onDeleteComment}
         />
       )}
       {user && post.user && user.id === post.user.id && (

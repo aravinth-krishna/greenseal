@@ -24,13 +24,16 @@ const Comment = ({ comment, user, onDelete, onReply }: CommentProps) => {
   return (
     <div className={styles.comment}>
       <p>{comment.content}</p>
-      <p>By {comment.user ? comment.user.username : "Unknown User"}</p>
-      {user?.id === comment.user?.id && (
-        <button onClick={() => onDelete(comment.id)}>Delete</button>
-      )}
-      <button onClick={() => setReplying(!replying)}>
-        {replying ? "Cancel" : "Reply"}
-      </button>
+      <p>by {comment.user ? comment.user.username : "Unknown User"}</p>
+      <div className={styles.commentOptions}>
+        {user?.id === comment.user?.id && (
+          <button onClick={() => onDelete(comment.id)}>Delete</button>
+        )}
+        <button onClick={() => setReplying(!replying)}>
+          {replying ? "Cancel" : "Reply"}
+        </button>
+      </div>
+
       {replying && (
         <form
           onSubmit={(e) => {

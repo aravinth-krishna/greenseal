@@ -8,6 +8,13 @@
   transition: box-shadow 0.2s ease-in-out;
 }
 
+.commentOptions {
+  display: flex;
+  justify-content: start;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .comment:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }

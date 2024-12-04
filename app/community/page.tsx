@@ -233,7 +233,9 @@ const Community = () => {
           Submit
         </button>
       </form>
+
       <div className={styles.postsList}>
+        <h2>🔥Top Voted Posts 👇</h2>
         {posts.length > 0 ? (
           posts.map((post) => (
             <PostCard
