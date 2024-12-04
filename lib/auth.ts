@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
+import jwt from "jsonwebtoken";
 
 export interface CustomNextApiRequest extends NextApiRequest {
   user?: { id: number; email: string };

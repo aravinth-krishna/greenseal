@@ -1,9 +1,9 @@
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./CompanyCard.module.css";
 import CircularProgressBar from "../CircularProgressBar/CircularProgressBar";
 import EnvironmentalBadge from "../EnvironmentalBadge/EnvironmentalBadge";
 import LevelIndicator from "../LevelIndicator/LevelIndicator";
-import Link from "next/link";
 
 interface CompanyProps {
   name: string;
@@ -22,6 +22,19 @@ const CompanyCard = ({
   environment_level,
   environment_grade,
 }: CompanyProps) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLearnMoreClick = async () => {
+    setLoading(true);
+    try {
+      window.location.href = `/companies/${name}`;
+    } catch (error) {
+      console.error("Error loading company details", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.companyCard}>
       <div className={styles.header}>
@@ -44,9 +57,13 @@ const CompanyCard = ({
           </div>
         </div>
 
-        <Link href={`/companies/${name}`} className={styles.learnMoreButton}>
-          Learn More
-        </Link>
+        <button
+          onClick={handleLearnMoreClick}
+          className={styles.learnMoreButton}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Learn More"}
+        </button>
       </div>
     </div>
   );

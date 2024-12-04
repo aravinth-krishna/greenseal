@@ -19,7 +19,13 @@ const Community = () => {
     title: string;
     content: string;
     user: { id: number; username: string };
-    votes: { voteType: number }[];
+    votes: {
+      id: number;
+      voteType: number;
+      createdAt: string;
+      userId: number;
+      postId: number;
+    }[];
     comments: PostComment[];
   }
 
@@ -51,9 +57,17 @@ const Community = () => {
     };
 
     const fetchPosts = async () => {
-      const res = await fetch("/api/posts");
-      const data = await res.json();
-      setPosts(data);
+      try {
+        const res = await fetch("/api/posts");
+        if (!res.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+        const data = await res.json();
+        setPosts(data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        setPosts([]);
+      }
     };
 
     fetchUser();
@@ -104,26 +118,6 @@ const Community = () => {
       const updatedPosts = await fetch("/api/posts");
       const data: Post[] = await updatedPosts.json();
       setPosts(data);
-    }
-  };
-
-  const handleDeletePost = async (postId: number) => {
-    if (!user) {
-      alert("You must be logged in to delete a post");
-      return;
-    }
-
-    const res = await fetch("/api/posts", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({ postId }),
-    });
-
-    if (res.ok) {
-      setPosts((prev) => prev.filter((post) => post.id !== postId));
     }
   };
 
@@ -178,6 +172,31 @@ const Community = () => {
     }
   };
 
+  const handleDeletePost = async (postId: number) => {
+    if (!user) {
+      alert("You must be logged in to delete a post");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    console.log("Token:", token); // Add this line to check the token
+
+    const res = await fetch(`/api/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.ok) {
+      setPosts((prev) => prev.filter((post) => post.id !== postId));
+    } else {
+      const data = await res.json();
+      alert(data.error || "Failed to delete post");
+    }
+  };
+
   return (
     <div className={styles.communityContainer}>
       <h1 className={styles.heading}>Community Posts</h1>
@@ -201,7 +220,6 @@ const Community = () => {
           value={newPost.title}
           onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
           required
-          onDeletePost={handleDeletePost}
         />
         <textarea
           placeholder="Post Content"
@@ -223,6 +241,7 @@ const Community = () => {
               onVote={handleVote}
               onReply={handleNewComment}
               onDeleteComment={handleDeleteComment}
+              onDeletePost={handleDeletePost}
             />
           ))
         ) : (

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./NewsCard.module.css";
 
 type NewsArticle = {
@@ -24,7 +25,13 @@ const NewsCard = ({
     <div className={styles.newsCard}>
       <div className={styles.imageContainer}>
         {urlToImage ? (
-          <img src={urlToImage} alt={title} className={styles.image} />
+          <img
+            src={urlToImage}
+            alt={title}
+            className={styles.image}
+            width={500}
+            height={300}
+          />
         ) : (
           <div className={styles.placeholderImage}>Image Not Available</div>
         )}

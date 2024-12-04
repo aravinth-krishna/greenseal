@@ -44,7 +44,14 @@
   box-shadow: 0 0 3px rgba(106, 17, 203, 0.5);
 }
 
+.form a {
+  color: #6a11cb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .form button {
+  margin-bottom: 0.5rem;
   width: 100%;
   padding: 0.75rem;
   background: linear-gradient(135deg, #6a11cb, #2575fc);

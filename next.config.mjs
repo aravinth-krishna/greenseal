@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "static4.finnhub.io",
       },
+      {
+        protocol: "https",
+        hostname: "i-invdn-com.investing.com",
+      },
     ],
   },
 };

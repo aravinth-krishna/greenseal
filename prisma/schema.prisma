@@ -10,7 +10,7 @@ datasource db {
 model Company {
   id                   Int      @id @default(autoincrement())
   ticker               String?  @db.VarChar(5)
-  name                 String?  @db.VarChar(255)
+  name                 String?  @unique @db.VarChar(255)
   currency             String?  @db.VarChar(3)
   exchange             String?  @db.VarChar(255)
   industry             String?  @db.VarChar(255)

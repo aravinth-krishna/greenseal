@@ -1,6 +1,22 @@
-// File: components/CommentSection/Comment.tsx
+// File: components/Comment/Comment.tsx
 import { useState } from "react";
 import styles from "./Comment.module.css";
+
+interface PostComment {
+  id: number;
+  content: string;
+  user: { id: number; username: string } | null;
+  postId: number;
+  parentId: number | null;
+  children?: PostComment[];
+}
+
+interface CommentProps {
+  comment: PostComment;
+  user: { id: number; username: string } | null;
+  onDelete: (commentId: number) => void;
+  onReply: (postId: number, content: string, parentId: number | null) => void;
+}
 
 const Comment = ({ comment, user, onDelete, onReply }: CommentProps) => {
   const [replying, setReplying] = useState(false);

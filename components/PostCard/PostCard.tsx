@@ -20,14 +20,24 @@ interface PostCardProps {
       id: number;
       content: string;
       user: { id: number; username: string };
+      children: any[];
+      postId: number;
     }[];
   };
   user: { id: number; username: string } | null;
-  onVote: (postId: number, vote: number) => void;
-  onReply: (postId: number, content: string, parentId: number | null) => void;
+  onVote: (postId: number, voteType: number) => void;
+  onReply: (postId: number, content: string, parentId?: number | null) => void;
+  onDeletePost: (postId: number) => void;
+  onDeleteComment: (commentId: number) => void;
 }
 
-const PostCard = ({ post, user, onVote, onReply }: PostCardProps) => {
+const PostCard = ({
+  post,
+  user,
+  onVote,
+  onReply,
+  onDeletePost,
+}: PostCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleComments = () => {
@@ -63,6 +73,14 @@ const PostCard = ({ post, user, onVote, onReply }: PostCardProps) => {
           user={user}
           onReply={onReply}
         />
+      )}
+      {user && post.user && user.id === post.user.id && (
+        <button
+          onClick={() => onDeletePost(post.id)}
+          className={styles.deleteButton}
+        >
+          Delete
+        </button>
       )}
     </div>
   );

@@ -5,9 +5,10 @@ import styles from "./CommentSection.module.css";
 interface PostComment {
   id: number;
   content: string;
-  user: { id: number; username: string };
-  children: PostComment[];
+  user: { id: number; username: string } | null;
   postId: number;
+  parentId: number | null;
+  children?: PostComment[];
 }
 
 interface CommentSectionProps {
@@ -20,7 +21,7 @@ interface CommentSectionProps {
 
 const CommentSection = ({
   postId,
-  comments = [], // Default value for comments
+  comments = [],
   user,
   onDelete,
   onReply,

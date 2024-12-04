@@ -2,53 +2,17 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prismaClient";
 import jwt from "jsonwebtoken";
 
-export async function POST(req: Request) {
-  const { userId, title, content, companyId } = await req.json();
-
-  try {
-    const post = await prisma.post.create({
-      data: {
-        title,
-        content,
-        userId,
-        companyId,
-      },
-      include: {
-        user: { select: { id: true, username: true } }, // Ensure id is included
-      },
-    });
-
-    return NextResponse.json(post);
-  } catch (error) {
-    return NextResponse.json({ error: "Error creating post" }, { status: 500 });
-  }
-}
-
-export async function GET() {
-  try {
-    const posts = await prisma.post.findMany({
-      include: {
-        user: { select: { id: true, username: true } }, // Ensure id is included
-        company: { select: { name: true } },
-        votes: true,
-        comments: true,
-      },
-    });
-
-    return NextResponse.json(posts);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Error fetching posts" },
-      { status: 500 }
-    );
-  }
-}
-
 export async function DELETE(req: Request) {
-  const { postId } = await req.json();
+  const url = new URL(req.url);
+  const postId = url.searchParams.get("postId");
+
+  if (!postId) {
+    return NextResponse.json({ error: "Post ID is required" }, { status: 400 });
+  }
 
   const authHeader = req.headers.get("authorization");
   const token = authHeader?.split(" ")[1];
+
   if (!token) {
     return NextResponse.json(
       { error: "Access denied, no token provided" },
@@ -64,7 +28,7 @@ export async function DELETE(req: Request) {
     const userId = decoded.id;
 
     const post = await prisma.post.findUnique({
-      where: { id: postId },
+      where: { id: parseInt(postId) },
     });
 
     if (!post || post.userId !== userId) {
@@ -75,11 +39,62 @@ export async function DELETE(req: Request) {
     }
 
     await prisma.post.delete({
-      where: { id: postId },
+      where: { id: parseInt(postId) },
     });
 
     return NextResponse.json({ message: "Post deleted successfully" });
   } catch (err) {
     return NextResponse.json({ error: "Invalid token" }, { status: 403 });
+  }
+}
+
+export async function GET() {
+  try {
+    const posts = await prisma.post.findMany({
+      include: {
+        user: true,
+        votes: true,
+        comments: {
+          include: {
+            user: true,
+            children: true,
+          },
+        },
+      },
+    });
+    return NextResponse.json(posts);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch posts" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: Request) {
+  const { userId, title, content } = await req.json();
+
+  if (!userId || !title || !content) {
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const newPost = await prisma.post.create({
+      data: {
+        userId,
+        title,
+        content,
+      },
+    });
+
+    return NextResponse.json(newPost);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to create post" },
+      { status: 500 }
+    );
   }
 }

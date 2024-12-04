@@ -22,15 +22,12 @@ const News = () => {
   const fetchNews = async (timeRange: string) => {
     const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
     const query = `
-      climate OR environment OR sustainability OR "green energy" OR "renewable energy" OR
-      solar OR wind OR biodiversity OR conservation OR pollution OR emissions OR
-      "sustainable development" OR "climate action" OR "carbon neutrality" OR eco-friendly OR
-      "net zero" OR "environmental responsibility" OR "corporate social responsibility" OR
-      "green technology" OR "energy efficiency" OR recycling OR wildlife OR "clean air"
-      OR nature OR "climate change" OR "global warming" OR "environmental protection"
+      climate OR environment OR sustainability OR "green energy" OR
+      "renewable energy" OR pollution OR emissions OR conservation OR
+      recycling OR wildlife OR biodiversity OR "carbon neutrality"
     `
       .replace(/\s+/g, " ")
-      .trim(); // Remove extra spaces and newlines
+      .trim();
 
     const today = new Date();
     const fromDate = new Date(today);
@@ -39,37 +36,55 @@ const News = () => {
       case "last24Hours":
         fromDate.setDate(today.getDate() - 1);
         break;
+      case "last48Hours":
+        fromDate.setDate(today.getDate() - 2);
+        break;
       case "lastWeek":
         fromDate.setDate(today.getDate() - 7);
         break;
       case "lastMonth":
         fromDate.setMonth(today.getMonth() - 1);
         break;
-      case "lastYear":
-        fromDate.setFullYear(today.getFullYear() - 1);
-        break;
       default:
         fromDate.setMonth(today.getMonth() - 1);
     }
 
-    const fromDateString = fromDate.toISOString().split("T")[0];
-    const toDateString = today.toISOString().split("T")[0];
+    const fromDateString = `${fromDate.getFullYear()}-${(
+      fromDate.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${fromDate.getDate().toString().padStart(2, "0")}`;
+    const toDateString = `${today.getFullYear()}-${(today.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
     const sortBy = "publishedAt";
 
     const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(
       query
-    )}&from=${fromDateString}&to=${toDateString}&sortBy=${sortBy}&language=en&searchIn=title,description,content&apiKey=${apiKey}`;
+    )}&from=${fromDateString}&to=${toDateString}&sortBy=${sortBy}&language=en&apiKey=${apiKey}`;
 
     try {
-      console.log("Fetching news from URL:", url); // Debugging statement
       const res = await fetch(url);
       const data = await res.json();
-      console.log("API response data:", data); // Debugging statement
+
+      console.log("From Date:", fromDateString);
+      console.log("To Date:", toDateString);
+      console.log("Fetched data:", data); // Debug log
 
       if (data.articles) {
-        setArticles(data.articles);
+        const filteredArticles = data.articles.filter(
+          (article: NewsArticle) =>
+            !(
+              article.title?.includes("[Removed]") ||
+              article.description?.includes("[Removed]") ||
+              article.content?.includes("[Removed]") ||
+              !/\b(climate|environment|sustainability|green|renewable|pollution|emissions|conservation|recycling|wildlife|biodiversity|carbon)\b/i.test(
+                `${article.title} ${article.description} ${article.content}`
+              )
+            )
+        );
+        setArticles(filteredArticles);
       } else {
-        console.error("No articles found in the response");
         setArticles([]);
       }
     } catch (error) {
@@ -80,29 +95,42 @@ const News = () => {
 
   useEffect(() => {
     fetchNews(timeRange);
+    console.log("Fetching news for", timeRange);
   }, [timeRange]);
 
   return (
     <div className={styles.newsPage}>
       <h1 className={styles.pageTitle}>Environmental News</h1>
+      <div className={styles.infoContainer}>
+        <p className={styles.infoText}>
+          Stay updated with the latest environmental news. Use the filters to
+          explore articles on topics such as climate change, sustainability,
+          wildlife conservation, and renewable energy from different time
+          periods.
+        </p>
+      </div>
       <div className={styles.filterContainer}>
-        <label htmlFor="timeRange">Filter by:</label>
+        <label htmlFor="timeRange" className={styles.filterLabel}>
+          Filter by Time Range:
+        </label>
         <select
           id="timeRange"
           value={timeRange}
           onChange={(e) => setTimeRange(e.target.value)}
+          className={styles.filterSelect}
         >
           <option value="last24Hours">Last 24 Hours</option>
+          <option value="last48Hours">Last 48 Hours</option>
           <option value="lastWeek">Last Week</option>
           <option value="lastMonth">Last Month</option>
-          <option value="lastYear">Last Year</option>
         </select>
       </div>
+
       <div className={styles.newsGrid}>
         {articles.length > 0 ? (
           articles.map((article: NewsArticle, index: number) => (
             <NewsCard
-              key={`${article.url}-${index}`} // Ensure unique key
+              key={`${article.url}-${index}`}
               source={article.source}
               author={article.author}
               title={article.title}
