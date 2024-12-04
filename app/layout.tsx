@@ -39,7 +39,7 @@ export default function RootLayout({
           <BottomNavbar />
           <SocialsGroup />
 
-          <span>Copyright &copy;2024 GreenSeal.org</span>
+          <span>Copyright &copy; 2024 GreenSeal.org</span>
         </footer>
       </body>
     </html>
