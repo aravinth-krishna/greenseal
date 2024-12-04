@@ -25,6 +25,12 @@
   height: 60px;
 }
 
+.navbar ul li h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-left: 1rem;
+}
+
 .navbar ul li a {
   height: 100%;
   width: 100%;

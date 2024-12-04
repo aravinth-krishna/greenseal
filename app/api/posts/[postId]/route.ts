@@ -35,12 +35,26 @@ export async function DELETE(
       );
     }
 
+    await prisma.comment.deleteMany({
+      where: { postId: parseInt(postId) },
+    });
+
+    await prisma.vote.deleteMany({
+      where: { postId: parseInt(postId) },
+    });
+
     await prisma.post.delete({
       where: { id: parseInt(postId) },
     });
 
-    return NextResponse.json({ message: "Post deleted successfully" });
-  } catch (err) {
-    return NextResponse.json({ error: "Invalid token" }, { status: 403 });
+    return NextResponse.json({
+      message: "Post, its comments, and votes deleted successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "An error occurred while deleting the post" },
+      { status: 500 }
+    );
   }
 }

@@ -179,7 +179,6 @@ const Community = () => {
     }
 
     const token = localStorage.getItem("token");
-    console.log("Token:", token); // Add this line to check the token
 
     const res = await fetch(`/api/posts/${postId}`, {
       method: "DELETE",
@@ -235,7 +234,7 @@ const Community = () => {
       </form>
 
       <div className={styles.postsList}>
-        <h2>🔥Top Voted Posts 👇</h2>
+        {posts.length > 0 ? <h2>🔥Top Voted Posts 👇</h2> : null}
         {posts.length > 0 ? (
           posts.map((post) => (
             <PostCard
