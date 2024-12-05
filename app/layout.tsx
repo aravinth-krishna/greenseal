@@ -18,7 +18,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "GreenSeal.org",
-  description: "Corporate Accountability Tracker",
+  description: "Environmental Awareness and Accountability Platform",
 };
 
 export default function RootLayout({
